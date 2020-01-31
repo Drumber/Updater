@@ -9,6 +9,8 @@ import java.nio.channels.ReadableByteChannel;
 
 public class FileDownloader {
 	
+	private boolean downloadSuccessful;
+	
 	public FileDownloader(String url, String fileName) throws IOException {
 		this(new URL(url), fileName);
 	}
@@ -19,14 +21,17 @@ public class FileDownloader {
 			FileOutputStream fos = new FileOutputStream(fileName);
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			
-			System.out.println(fos.getFD());
-			
 			inputStream.close();
 			rbc.close();
 			fos.close();
 		} finally {
-			System.out.println("Download finished!");
+			downloadSuccessful = true;
 		}
+	}
+	
+	
+	public boolean isDownloadSuccessful() {
+		return downloadSuccessful;
 	}
 
 }

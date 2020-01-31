@@ -21,14 +21,14 @@ public class GitHubParser extends SiteParser {
 		this(currentTag, String.format("https://api.github.com/repos/%s/%s/releases", author, repository));
 	}
 	
-	public GitHubParser(String currentTag, String githubApiUrl) throws IOException {
+	public GitHubParser(String currentTag, String githubApiUrl) {
 		apiUrl = githubApiUrl;
 		curTag = currentTag;
-		check();
 	}
 	
 	
-	private void check() throws IOException {
+	@Override
+	public void check() throws IOException {
 		URL requestUrl = new URL(apiUrl);
 		Scanner scanner = new Scanner(requestUrl.openStream());
 		String response = scanner.useDelimiter("\\Z").next();
