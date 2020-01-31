@@ -28,7 +28,7 @@ public class GitHubParser extends SiteParser {
 	
 	
 	@Override
-	public void check() throws IOException {
+	public void check() throws Exception {
 		URL requestUrl = new URL(apiUrl);
 		Scanner scanner = new Scanner(requestUrl.openStream());
 		String response = scanner.useDelimiter("\\Z").next();

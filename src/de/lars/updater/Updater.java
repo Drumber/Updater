@@ -48,8 +48,12 @@ public class Updater {
 		// check for new version
 		try {
 			parser.check();
-		} catch (IOException e) {
-			System.out.println("Error while checking for new version.");
+		} catch (Exception e) {
+			if(e instanceof IOException) {
+				System.out.println("Error while checking for new version.");
+			} else {
+				System.out.println("Invalid version tag!");
+			}
 			e.printStackTrace();
 			
 			exit(1);
@@ -58,12 +62,13 @@ public class Updater {
 		
 		// print check result
 		if(!parser.isNewVersionAvailable()) {
-			System.out.println("No new version available. \nClosing...");
+			System.out.println("No new version available.");
+			System.out.println("Installed: " + curVersion + ", Latest: " + parser.getNewestVersionTag());
 			exit(0);
 		}
 		
 		System.out.println("A new version is available!");
-		System.out.println("Installed: " + curVersion + "; New: " + parser.getNewestVersionTag());
+		System.out.println("Installed: " + curVersion + ", New: " + parser.getNewestVersionTag());
 		System.out.println("URL: " + parser.getNewestUrl());
 		
 		File file = new File(output);

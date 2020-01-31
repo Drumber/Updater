@@ -10,5 +10,5 @@ public abstract class SiteParser {
 	public abstract String getNewestFileName();
 	public abstract boolean isNewVersionAvailable();
 
-	public void check() throws IOException {}
+	public void check() throws IOException, Exception {}
 }

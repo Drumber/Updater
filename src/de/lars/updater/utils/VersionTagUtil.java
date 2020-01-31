@@ -6,15 +6,19 @@ public class VersionTagUtil {
 	 * Convert version tag to version number
 	 * @param tag Version tag
 	 * @return Substring of tag that contains only numbers
+	 * @throws Exception 
 	 */
-	public static String getVersionNumber(String tag) {
-		int beginIndex = 0, endIndex = 0;
+	public static String getVersionNumber(String tag) throws Exception {
+		int beginIndex = -1, endIndex = tag.length() - 1;
 		for(int i = 0; i < tag.length(); i++) {
-			if(Character.isDigit(tag.charAt(i)) && beginIndex == 0) {
+			if(Character.isDigit(tag.charAt(i)) && beginIndex == -1) {
 				beginIndex = i;
-			} else if(beginIndex != 0) {
+			} else if(beginIndex != -1) {
 				endIndex = i;
 			}
+		}
+		if(beginIndex == -1) {	// invalid version tag (contains no numbers)
+			throw new Exception("Invalid version tag. Tag must contain at least one number.");
 		}
 		return tag.substring(beginIndex, endIndex + 1);
 	}
