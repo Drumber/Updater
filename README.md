@@ -3,15 +3,17 @@ Only GitHub is currently supported. Support for maven will be added soon.
 
 ### Usage
 ```
- -cv,--currentversion <arg>   current version tag
- -o,--output <arg>            output file path
- -u,--url <arg>               api url
- -w,--wait                    wait until the file is no longer used by a process
+ -help                               print this help message
+ -u,--url <url>                      api url
+ -o,--output <filePath>              output file path
+ -cv,--currentversion <versionTag>   current version tag
+ -w,--wait                           wait until the file is no longer used by a process
+ -cmd,--command <command>            execute this command after completion
 ```
   
 ### Example usage
 ```
-java -jar updater.jar -u https://api.github.com/repos/Drumber/RemoteLight/releases -cv pre0.2.0.6 -o RemoteLight.jar -w
+java -jar updater.jar -u https://api.github.com/repos/Drumber/RemoteLight/releases -cv pre0.2.0.6 -o RemoteLight.jar -w -cmd "java -jar RemoteLight.jar"
 ```
   
 ### License
