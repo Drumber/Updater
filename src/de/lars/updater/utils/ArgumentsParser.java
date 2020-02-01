@@ -20,6 +20,7 @@ public class ArgumentsParser {
 		
 		parser = new DefaultParser();
 		helpFormatter = new HelpFormatter();
+		helpFormatter.setOptionComparator(null);
 	}
 	
 	
@@ -34,21 +35,33 @@ public class ArgumentsParser {
 	
 	
 	protected void addToOptions(Options options) {
+		Option help = new Option("help", false, "print this help message");
+		help.setRequired(false);
+		options.addOption(help);
+		
 		Option url = new Option("u", "url", true, "api url");
 		url.setRequired(true);
+		url.setArgName("url");
 		options.addOption(url);
 		
 		Option output = new Option("o", "output", true, "output file path");
 		output.setRequired(true);
+		output.setArgName("filePath");
 		options.addOption(output);
 		
 		Option curVersion = new Option("cv", "currentversion", true, "current version tag");
 		curVersion.setRequired(true);
+		curVersion.setArgName("versionTag");
 		options.addOption(curVersion);
 		
 		Option wait = new Option("w", "wait", false, "wait until the file is no longer used by a process");
 		wait.setRequired(false);
 		options.addOption(wait);
+		
+		Option cmd = new Option("cmd", "command", true, "execute this command after completion");
+		cmd.setRequired(false);
+		cmd.setArgName("command");
+		options.addOption(cmd);
 	}
 
 }

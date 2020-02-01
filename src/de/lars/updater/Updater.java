@@ -27,7 +27,11 @@ public class Updater {
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 			argsParser.printHelp("updater");
-			
+			exit(1);
+		}
+		
+		if(cmd.hasOption("help")) {
+			argsParser.printHelp("updater");
 			exit(1);
 		}
 		
@@ -41,7 +45,6 @@ public class Updater {
 		
 		if(parser == null) {
 			System.out.println("URL not supported!");
-			
 			exit(1);
 		}
 		
@@ -55,7 +58,6 @@ public class Updater {
 				System.out.println("Invalid version tag!");
 			}
 			e.printStackTrace();
-			
 			exit(1);
 		}
 		
@@ -107,6 +109,21 @@ public class Updater {
 			System.out.println("Error while downloading file.");
 			e.printStackTrace();
 			exit(1);
+		}
+		
+		
+		// execute command after completion
+		if(cmd.hasOption("cmd")) {
+			String command = cmd.getOptionValue("command");
+			if(command != null && !command.isEmpty()) {
+				try {
+					Runtime.getRuntime().exec(command);
+					System.out.println(String.format("Command '%s' executed.", command));
+				} catch (IOException e) {
+					System.out.println(String.format("Could not execute command '%s'.", command));
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 	

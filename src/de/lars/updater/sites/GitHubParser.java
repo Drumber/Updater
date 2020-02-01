@@ -1,6 +1,5 @@
 package de.lars.updater.sites;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -17,7 +16,7 @@ public class GitHubParser extends SiteParser {
 	private boolean newVersionAvailable;
 	private JsonObject jsonNewest;
 	
-	public GitHubParser(String currentTag, String author, String repository) throws IOException {
+	public GitHubParser(String currentTag, String author, String repository) {
 		this(currentTag, String.format("https://api.github.com/repos/%s/%s/releases", author, repository));
 	}
 	
